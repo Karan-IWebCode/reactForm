@@ -1,8 +1,14 @@
+import { useState } from 'react';
 import './Field.css'
 import { Fieldarr, Fieldarr2, Fieldarr3, Fieldarr4, Fieldarr5 } from './Fieldarr'
 
+// var Recaptcha = require('react-recaptcha');
 
 const Field = () => {
+	const [isShown,setIsShown] = useState(false)
+	const handleClick = () =>{
+		setIsShown(current => !current)
+	}
 	return(
 		<>
 		<div className="fieldSection">
@@ -10,19 +16,39 @@ const Field = () => {
 		<div className='main'>
 		<h4 className="headingField">Submit your application</h4>
 		<div className="inputGroup">
-			<p className="inputName">Resume/CV</p>
+			<p className="inputName">Resume/CV<span className='starReq'>*</span></p>
+			
 			<div className="disValue">
-				<button className="inputValue">ATTACH RESUME/CV</button>
+				<button className="inputValue" style={{minWidth:"250px"}}>Attach</button>
+				<input className="inputFile" type="file" style={{textAlign:"left"}} />	
 			</div>
 		</div>
 			
 				{  
 					Fieldarr.map((item)=>{
+						// console.log("item",!item.required);
+						
 				return(
 					<>
 					
 					<div className="inputGroup">
-				<p className="inputName">{item.label}</p>
+				<p className="inputName">
+					{item.label}
+
+					
+
+				
+					{/* {
+						item.required && <span className='starReq'>*</span>
+					} */}
+
+					{item.required === true ?
+						 (
+						<><span className='starReq'>*</span></>
+						):null}
+					
+
+					</p>
 				<div className="disValue">
 					<input className='inputValue' />
 				</div>
@@ -100,7 +126,9 @@ const Field = () => {
 					<>
 
 					<div className="inputGroup3">
-						<p className="inputName">{item.label}</p>
+						<p className="inputName" onClick={item.label === 'Race' ? handleClick: () => {} }>
+							{item.label}
+						</p>
 						<div className="disValue3">
 							<select className='inputValue3' >
 							{  
@@ -112,7 +140,24 @@ const Field = () => {
 				)
 				})}
 
+
 							</select>
+						<ul>
+							{ isShown &&
+								item.dataHead?.map((item,pos)=>{
+									return(
+										<li className="" style={{listStyleType:"none",textAlign:"left"}}>
+											<>
+											<div className="dataHead">{item.head}</div>
+											<div className="dataPara">{item.desc}</div>
+											</>
+										</li>
+									)
+								})
+							}
+							
+						</ul>
+
 							
 						</div>
 					</div>
@@ -121,6 +166,9 @@ const Field = () => {
 				)
 				})}
 			
+			{/* <Recaptcha sitekey="xxxxxxxxxxxxxxxxxxxx" />
+			<iframe title="reCAPTCHA" src="https://www.google.com/recaptcha/api2/anchor?ar=1&amp;k=6LdWHmUeAAAAAPyHlfKyffhTuD8HUy3uZ_cmZkEX&amp;co=aHR0cHM6Ly9ibGlzc2Z1bC12YXJhaGFtaWhpcmEtNzE5YjMxLm5ldGxpZnkuYXBwOjQ0Mw..&amp;hl=en&amp;type=image&amp;v=Ixi5IiChXmIG6rRkjUa1qXHT&amp;theme=light&amp;size=normal&amp;badge=bottomright&amp;cb=4qidkbytvh5c" width="304" height="78" role="presentation" name="a-sktz8q2mwd6r"  scrolling="no" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox"></iframe>
+			 */}
 			<button className="submitButton">Submit Applicaton</button>
 
 
