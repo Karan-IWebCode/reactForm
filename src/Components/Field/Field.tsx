@@ -25,11 +25,11 @@ const Field = () => {
 		</div>
 			
 				{  
-					Fieldarr.map((item)=>{
+					Fieldarr.map((item,i)=>{
 						// console.log("item",!item.required);
 						
 				return(
-					<>
+					<div key={i}>
 					
 					<div className="inputGroup">
 				<p className="inputName">
@@ -54,16 +54,16 @@ const Field = () => {
 				</div>
 			</div>
 
-				</>
+				</div>
 				)
 				})}
 		
 			<h4 className="headingField">Links</h4>
 
 			{  
-					Fieldarr2.map((item)=>{
+					Fieldarr2.map((item,i)=>{
 				return(
-					<>
+					<div key={i}>
 					
 					<div className="inputGroup">
 				<p className="inputName">{item.label}</p>
@@ -72,14 +72,14 @@ const Field = () => {
 				</div>
 			</div>
 
-				</>
+				</div>
 				)
 				})}
 
 			{  
-					Fieldarr3.map((item)=>{
+					Fieldarr3.map((item,i)=>{
 				return(
-					<>
+					<div key={i}>
 					<h4 className="headingField">{item.heading}</h4>
 
 					<div className="inputGroup2">
@@ -89,14 +89,14 @@ const Field = () => {
 						</div>
 					</div>
 
-				</>
+				</div>
 				)
 				})}
 
 			{  
-					Fieldarr4.map((item)=>{
+					Fieldarr4.map((item,i)=>{
 				return(
-					<>
+					<div key={i}>
 					<h4 className="headingField">{item.heading}</h4>
 
 					<div className="inputGroup2">
@@ -106,7 +106,7 @@ const Field = () => {
 						</div>
 					</div>
 
-				</>
+				</div>
 				)
 				})}
 
@@ -121,9 +121,9 @@ const Field = () => {
 			</p>
 
 			{  
-					Fieldarr5.map((item)=>{
+					Fieldarr5.map((item,i)=>{
 				return(
-					<>
+					<div key={i}>
 
 					<div className="inputGroup3">
 						<p className="inputName" onClick={item.label === 'Race' ? handleClick: () => {} }>
@@ -132,11 +132,11 @@ const Field = () => {
 						<div className="disValue3">
 							<select className='inputValue3' >
 							{  
-								item.options.map((subitems)=>{
+								item.options.map((subitems,i)=>{
 									return(
-									<>
+									<div key={i}>
 										<option value={`$subitems.options`}>{subitems}</option>
-									</>
+									</div>
 				)
 				})}
 
@@ -146,7 +146,7 @@ const Field = () => {
 							{ isShown &&
 								item.dataHead?.map((item,pos)=>{
 									return(
-										<li className="" style={{listStyleType:"none",textAlign:"left"}}>
+										<li key={pos} className="" style={{listStyleType:"none",textAlign:"left"}}>
 											<>
 											<div className="dataHead">{item.head}</div>
 											<div className="dataPara">{item.desc}</div>
@@ -162,7 +162,7 @@ const Field = () => {
 						</div>
 					</div>
 
-				</>
+				</div>
 				)
 				})}
 			
