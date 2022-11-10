@@ -1,0 +1,23 @@
+.footerSection{
+    background: rgb(237, 238, 241);
+    width: 100%;
+    color: rgb(127, 131, 138);
+    height: 40vh;
+    padding-top: 6%;
+    box-sizing: border-box;   
+}
+.footerPara{
+    max-width: 500px;
+    text-decoration: underline;
+    color: rgb(87, 158, 238);
+    cursor: pointer;
+    margin: 0px auto 12px;
+}
+.footerSpan{
+    color: rgb(127, 131, 138);
+}
+.footerImage{
+    position: relative;
+    top: 6px;
+    height: 24px;
+}
