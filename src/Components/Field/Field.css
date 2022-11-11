@@ -137,9 +137,10 @@ hr{
     color: rgb(85, 86, 89);
     font-size: 12px;
 }
+/* 
 input:focus{
     outline: 1px solid black;
-}
+} */
 
 @media only screen and (max-width: 600px) {
     .container{

@@ -1,10 +1,15 @@
+import internal from "stream";
+
 interface FieldarrInt{
     input?:string;
     type:string;
     label:string;
-    required:boolean;
+    required?:boolean;
     heading?:string;
-    placeholder?:string
+    placeholder?:string;
+    minLength?:number;
+    maxLength?:number ;
+    pattern?:any;
 }
 interface Fieldarr5Int{
     input:string;
@@ -19,21 +24,26 @@ interface Fieldarr5Int{
 }
 export const Fieldarr:FieldarrInt[] = [
     {
-        input:"Full Name",
+        input:"fullName",
         type:"text",   
-        label:"Full Name",
-        required:true
+        label:"fullName",
+        required:true,
+
     },
     {
         input:"Email",
         type:"text",   
         label:"Email",
-        required:true
+        required:true,
+        pattern: "/^[A-Z0-9. _%+-]+@[A-Z0-9. -]+\."
+        
     },
     {
         input:"Phone",
         type:"text",   
         label:"Phone",
+        minLength:6,
+        maxLength:10,
         required:false
     },
     {
@@ -46,35 +56,36 @@ export const Fieldarr:FieldarrInt[] = [
 
 export const Fieldarr2:FieldarrInt[] = [
     {
-        input:"Current Company",
+        input:"Linked URL",
         type:"text",   
         label:"Linked URL",
-        required:false
+        required:false,
+        pattern:"[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%"
     },
     
     {
-        input:"Current Company",
+        input:"Twitter URL",
         type:"text",   
         label:"Twitter URL",
         required:false
     },
     
     {
-        input:"Current Company",
+        input:"Github URL",
         type:"text",   
         label:"Github URL",
         required:false
     },
     
     {
-        input:"Current Company",
+        input:"Portfolio URL",
         type:"text",   
         label:"Portfolio URL",
         required:false
     },
     
     {
-        input:"Current Company",
+        input:"Other website",
         type:"text",   
         label:"Other website",
         required:false
@@ -84,7 +95,7 @@ export const Fieldarr2:FieldarrInt[] = [
 export const Fieldarr3:FieldarrInt[] = [
     {   
         heading:"PREFERRED PRONOUNS",
-        input:"If youd like, please share your pronouns with us.",
+        input:"Response",
         type:"text",
         label:"If youd like, please share your pronouns with us.",
         placeholder:"Type Your Response",
@@ -95,6 +106,7 @@ export const Fieldarr3:FieldarrInt[] = [
 export const Fieldarr4:FieldarrInt[] = [
     {   
         heading:"ADDITIONAL INFORMATION",
+        input:"AddInfo",
         type:"text",
         label:"additional information",
         placeholder:"Add a cover letter or anything else you want to share",
