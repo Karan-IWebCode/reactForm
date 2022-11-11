@@ -71,7 +71,7 @@
 }
 .inputFile{
     width: 300px;
-    opacity: 0;
+    opacity: 1;
     height: 45px;
     cursor: pointer;
     position: absolute;
@@ -136,6 +136,12 @@ hr{
 .dataPara{
     color: rgb(85, 86, 89);
     font-size: 12px;
+}
+span{
+    display: none;
+}
+input:invalid ~ span{
+    display: block;
 }
 /* 
 input:focus{

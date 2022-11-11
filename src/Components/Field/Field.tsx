@@ -1,4 +1,6 @@
-import { kMaxLength } from 'buffer';
+
+
+import { url } from 'inspector';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import './Field.css'
@@ -47,21 +49,28 @@ const Field = () => {
                           ) : null}
                       </p>
                       <div className="disValue">
-                        <input className='inputValue'
-                          {...register(`${item.input}`
-                            , {
-                              
-                               pattern: item.pattern
-                              , maxLength: item.maxLength,
-                              minLength: item.minLength,
-                              
-                                
-                            })} required={item.required}  />
-                            {/* {errors.fullName?.type === 'required' && <p role="alert">First name is required</p>}
-                            {errors.Email?.type === 'required' && <p role="alert">Email field is required</p>}   */}
+                        <input className='inputValue' type={item.type}
+                           {...register(`${item.label}`,{ required:{
+                            value:item.required ?? false,
+                            message:"Please fill this input"
+                          },minLength:{
+                            value:item.minLength ?? 0 ,
+                            message:"Invalid"
+                          },pattern: {
+                            value: item.pattern ,
+                            message: "Invalid email address"
+                          }
+                           }
+                          )} 
+                            />
+                           {
+                            errors[item.label] && 
+                            <p style={{color:"red"}}>
+                              {errors[item.label]?.message}
+                            </p>
+                          }
                       </div>
                     </div>
-
                   </div>
                 )
               })}
@@ -76,7 +85,13 @@ const Field = () => {
                     <div className="inputGroup">
                       <p className="inputName">{item.label}</p>
                       <div className="disValue">
-                        <input className='inputValue' {...register(`${item.input}`)} />
+                        <input className='inputValue' type={item.type} 
+                        {...register(`${item.input}`, { pattern:{
+                          value:item.pattern,
+                          message:"Invalid URL "  
+                        }
+                        })} />
+                        {errors[item.label] && <p style={{color:"red"}}>{errors[item.label]?.message}</p>}
                       </div>
                     </div>
 
@@ -111,7 +126,13 @@ const Field = () => {
                     <div className="inputGroup2">
                       <div className="disValue2">
                         <textarea className='inputValue' placeholder={`${item.placeholder}`}
-                          style={{ minHeight: "120px" }} {...register(`${item.input}`)} />
+                          style={{ minHeight: "120px" }} {...register(`${item.input}` ,{
+                            minLength:{
+                              value:item.minLength ?? 0,
+                              message:"Add Some More Info"
+                            }
+                          })} />
+                          {errors[item.label] && <p style={{color:"red"}}>{errors[item.label]?.message}</p>}
                       </div>
                     </div>
 

@@ -10,6 +10,7 @@ interface FieldarrInt{
     minLength?:number;
     maxLength?:number ;
     pattern?:any;
+    errorMessage?:string;
 }
 interface Fieldarr5Int{
     input:string;
@@ -27,68 +28,76 @@ export const Fieldarr:FieldarrInt[] = [
         input:"fullName",
         type:"text",   
         label:"fullName",
+        errorMessage:"This field is required",
         required:true,
+        minLength:11
 
     },
     {
         input:"Email",
-        type:"text",   
+        type:"Email",   
         label:"Email",
+        errorMessage:"This field is required",
         required:true,
-        pattern: "/^[A-Z0-9. _%+-]+@[A-Z0-9. -]+\."
+        pattern: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
         
     },
     {
         input:"Phone",
         type:"text",   
         label:"Phone",
-        minLength:6,
-        maxLength:10,
+        errorMessage:"Phone number should not be less than 6",
         required:false
     },
     {
         input:"Current Company",
         type:"text",   
         label:"Current Company",
-        required:false
+        errorMessage:"",
+        required:true
     }
 ] 
 
 export const Fieldarr2:FieldarrInt[] = [
     {
         input:"Linked URL",
-        type:"text",   
+        type:"url",   
         label:"Linked URL",
         required:false,
-        pattern:"[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%"
+        pattern:/^((ftp|http|https):\/\/)?www\.([A-z]+)\.([A-z]{2,})/
     },
     
     {
         input:"Twitter URL",
-        type:"text",   
+        type:"url",   
         label:"Twitter URL",
-        required:false
+        required:false,
+        pattern:/^((ftp|http|https):\/\/)?www\.([A-z]+)\.([A-z]{2,})/
+
     },
     
     {
         input:"Github URL",
-        type:"text",   
+        type:"url",   
         label:"Github URL",
-        required:false
+        required:false,
+        pattern:/^((ftp|http|https):\/\/)?www\.([A-z]+)\.([A-z]{2,})/
     },
     
     {
         input:"Portfolio URL",
-        type:"text",   
+        type:"url",   
         label:"Portfolio URL",
-        required:false
+        required:false,
+        pattern:/^((ftp|http|https):\/\/)?www\.([A-z]+)\.([A-z]{2,})/
     },
     
     {
         input:"Other website",
-        type:"text",   
+        type:"url",   
         label:"Other website",
-        required:false
+        required:false,
+        pattern:/^((ftp|http|https):\/\/)?www\.([A-z]+)\.([A-z]{2,})/
     },
 ]
 
@@ -110,7 +119,8 @@ export const Fieldarr4:FieldarrInt[] = [
         type:"text",
         label:"additional information",
         placeholder:"Add a cover letter or anything else you want to share",
-        required:false
+        required:false,
+        minLength:30
     },
 ]
 
