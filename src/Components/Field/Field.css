@@ -140,11 +140,9 @@ hr{
     font-size: 12px;
 }
 span{
-    display: none;
-}
-input:invalid ~ span{
     display: block;
 }
+
 .PhoneInputInput{
     width: 95%;
     border-radius: 3px;
@@ -180,5 +178,8 @@ input:focus{
     }
     .disValue3{
         width:100%
+    }
+    .footerSection{
+        height: 20vh;
     }
 }

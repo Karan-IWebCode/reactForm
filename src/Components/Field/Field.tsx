@@ -1,18 +1,16 @@
 
-
-import { url } from 'inspector';
-
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import './Field.css'
 import { Fieldarr, Fieldarr2, Fieldarr3, Fieldarr4, Fieldarr5 } from './Fieldarr'
+import Field1 from '../Field1/Field1';
 
 // var Recaptcha = require('react-recaptcha');
 
 const Field = () => {
-  const { register, handleSubmit, watch, formState: { errors } } = useForm();
+  const { register, handleSubmit, formState: { errors } } = useForm();
   const [isShown, setIsShown] = useState(false)
   const handleClick = () => {
     setIsShown(current => !current)
@@ -61,55 +59,8 @@ const Field = () => {
               </div>
             </div>
 
-            {
-              Fieldarr.map((item, i) => {
-                // console.log("item",!item.required);
-
-                return (
-                  <div key={i}>
-
-                    <div className="inputGroup">
-                      <p className="inputName" >
-                        {item.label}
-                        {/* {
-						item.required && <span className='starReq'>*</span>
-					} */}
-
-                        {item.required === true ?
-                          (
-                            <><span className='starReq'>*</span></>
-                          ) : null}
-                      </p>
-                      <div className="disValue">
-                        <input className='inputValue' type={item.type}
-                           {...register(`${item.label}`,{ required:{
-                            value:item.required ?? false,
-                            message:"Please fill this input"
-                          },minLength:{
-                            value:item.minLength ?? 0 ,
-                            message:"Invalid"
-                          },pattern: {
-                            value: item.pattern ,
-                            message: item.errorMessage ?? " "
-                          }
-                           }
-                          )} 
-                            />
-                           {
-                            errors[item.label] && 
-                            <p style={{color:"red"}}>
-                              {errors[item.label]?.message}
-                            </p>
-                          }
-                          
-                      </div>
-
-                      
-                    </div>
-                  </div>
-                )
-              })
-            }
+            <Field1 register={register} err={errors}/>
+            
 
             <div className="inputGroup">
               <p className="inputName">Phone2</p>
@@ -150,6 +101,7 @@ const Field = () => {
                         }
                         })} />
                         {errors[item.label] && <p style={{color:"red"}}>{errors[item.label]?.message}</p>}
+                        {console.log(errors)}
                       </div>
                     </div>
 
@@ -222,10 +174,15 @@ const Field = () => {
                     <div className="inputGroup3">
                       <p className="inputName" onClick={item.label === 'Race' ? handleClick : () => { }}>
                         {item.label}
-                          {/* <i className='fa fa-info' /> */}
+                          <i className='fa fa-info' />
                       </p>
                       <div className="disValue3">
-                        <select className='inputValue3' {...register(item.label)} >
+                        <select className='inputValue3' {...register(item.label,{
+                          required:{
+                            value:item.required,
+                            message:"Please select from list"
+                          }
+                        })} >
                           {
                             item.options.map((subitems, j) => {
                               return (
@@ -237,6 +194,8 @@ const Field = () => {
 
 
                         </select>
+                        {errors[item.label] && <p style={{color:"red"}}>{errors[item.label]?.message}</p>}
+                        <></>
                         <ul>
                           {isShown &&
                             item.dataHead?.map((item, pos) => {
@@ -263,7 +222,7 @@ const Field = () => {
 
             {/* <Recaptcha sitekey="xxxxxxxxxxxxxxxxxxxx" />
 			<iframe title="reCAPTCHA" src="https://www.google.com/recaptcha/api2/anchor?ar=1&amp;k=6LdWHmUeAAAAAPyHlfKyffhTuD8HUy3uZ_cmZkEX&amp;co=aHR0cHM6Ly9ibGlzc2Z1bC12YXJhaGFtaWhpcmEtNzE5YjMxLm5ldGxpZnkuYXBwOjQ0Mw..&amp;hl=en&amp;type=image&amp;v=Ixi5IiChXmIG6rRkjUa1qXHT&amp;theme=light&amp;size=normal&amp;badge=bottomright&amp;cb=4qidkbytvh5c" width="304" height="78" role="presentation" name="a-sktz8q2mwd6r"  scrolling="no" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox"></iframe>
-			 */}
+			 */} 
             <button className="submitButton" type='submit'>Submit Applicaton</button>
 
 

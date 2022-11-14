@@ -12,6 +12,14 @@ interface FieldarrInt{
     pattern?:any;
     errorMessage?:string;
 }
+
+interface Fieldarr2Int{
+    input:string,
+    type:string,
+    label:string,
+    required:boolean,
+    pattern:any
+}
 interface Fieldarr5Int{
     input:string;
     type:string;
@@ -42,14 +50,14 @@ export const Fieldarr:FieldarrInt[] = [
         pattern: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
         
     },
-    {
-        input:"Phone",
-        type:"text",   
-        label:"Phone",
-        errorMessage:"Invalid number",
-        required:false,
-        pattern:/^(\+91[\-\s]?)?[0]?(91)?[789]\d{9}$/
-    },
+    // {
+    //     input:"Phone",
+    //     type:"text",   
+    //     label:"Phone",
+    //     errorMessage:"Invalid number",
+    //     required:false,
+    //     pattern:/^(\+91[\-\s]?)?[0]?(91)?[789]\d{9}$/
+    // },
     {
         input:"Current Company",
         type:"text",   
@@ -59,7 +67,7 @@ export const Fieldarr:FieldarrInt[] = [
     }
 ] 
 
-export const Fieldarr2:FieldarrInt[] = [
+export const Fieldarr2:Fieldarr2Int[] = [
     {
         input:"Linked URL",
         type:"url",   
@@ -141,7 +149,7 @@ export const Fieldarr5:Fieldarr5Int[] = [
         input:"Gender",
         type:"select",   
         label:"Gender",
-        required:false,
+        required:true,
         options:[
             "Select ...",
             "Male",
@@ -153,7 +161,7 @@ export const Fieldarr5:Fieldarr5Int[] = [
         input:"Race",
         type:"select",   
         label:"Race",
-        required:false,
+        required:true,
         options:[
             "Select ...",
             "Hispanic or Latino",
@@ -201,7 +209,7 @@ export const Fieldarr5:Fieldarr5Int[] = [
         input:"Veteran Status",
         type:"select",   
         label:"Veteran Status",
-        required:false,
+        required:true,
         options:[
             "Select ...",
             "I am a veteran",
