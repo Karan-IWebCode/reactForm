@@ -60,6 +60,7 @@
     box-sizing: border-box;
 }
 .inputValue{
+    text-align: inherit;
     width: 95%;
     border-radius: 3px;
     border-width: 1px;
@@ -71,7 +72,7 @@
 }
 .inputFile{
     width: 300px;
-    opacity: 1;
+    opacity: 0;
     height: 45px;
     cursor: pointer;
     position: absolute;
@@ -98,6 +99,7 @@ hr{
 }
 .inputGroup3{
     display: flex;
+    align-items: baseline;
     width: 100%;
     margin: 16px auto;
     box-sizing: border-box
@@ -142,6 +144,16 @@ span{
 }
 input:invalid ~ span{
     display: block;
+}
+.PhoneInputInput{
+    width: 95%;
+    border-radius: 3px;
+    border-width: 1px;
+    border-color: rgb(226, 226, 226);
+    color: rgb(81, 83, 87);
+    font: 400 16px / 1.8 Lato;
+    border-style: solid;
+    padding: 4px 4px 4px 15px;
 }
 /* 
 input:focus{

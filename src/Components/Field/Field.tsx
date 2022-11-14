@@ -1,6 +1,9 @@
 
 
 import { url } from 'inspector';
+
+import 'react-phone-number-input/style.css'
+import PhoneInput from 'react-phone-number-input'
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import './Field.css'
@@ -14,6 +17,26 @@ const Field = () => {
   const handleClick = () => {
     setIsShown(current => !current)
   }
+  const [resumeError, setResumeError] = useState("")
+  const [resumeLabel, setResumeLabel] = useState("")
+  const [value, setValue] = useState()
+  
+
+  const onInputChange = (e:React.FormEvent<HTMLInputElement>) => {
+    if(e.currentTarget.files && e.currentTarget.files[0]){
+        console.log(e.currentTarget.files[0].name)
+        setResumeLabel(e.currentTarget.files[0].name)
+        
+        if(e.currentTarget.files[0].type !== 'application/pdf')
+            setResumeError('Invalid File Format')
+        else if(e.currentTarget.files[0].size > 5*1024*1024)
+            setResumeError('File size is greater than 5MB')
+        else 
+            setResumeError('')
+    }else{
+        setResumeError('This field is required')
+    }
+}
   return (
     <form onSubmit={handleSubmit((data) => console.log(data))}>
       <div className="fieldSection">
@@ -24,18 +47,16 @@ const Field = () => {
               <p className="inputName">Resume/CV<span className='starReq'>*</span></p>
 
               <div className="disValue">
-                <button className="inputValue" style={{ minWidth: "250px" }}>Attach</button>
-                <input className="inputFile" type="file" style={{ textAlign: "left" }} onChange={(event)=> {}}{
+                <button className="inputValue" style={{ minWidth: "250px" }}><i className="fa fa-paperclip" /> Attach RESUME/CV</button>
+                <input className="inputFile" type="file" style={{ textAlign: "left" }}  {
                   ...register("attach",{ 
                     required:{
                       value:true,
                       message:"Please add Attachment"
                     }, 
-                    validate:{
-                      
-                    }
                   })
-                }/>
+                } onChange={onInputChange}/>
+                {<p style={{color:"red"}}>{resumeError}</p>}
                 {errors.attach && <p style={{color:"red"}}>{errors.attach?.message}</p>}
               </div>
             </div>
@@ -69,7 +90,7 @@ const Field = () => {
                             message:"Invalid"
                           },pattern: {
                             value: item.pattern ,
-                            message: "Invalid email address"
+                            message: item.errorMessage ?? " "
                           }
                            }
                           )} 
@@ -80,11 +101,37 @@ const Field = () => {
                               {errors[item.label]?.message}
                             </p>
                           }
+                          
                       </div>
+
+                      
                     </div>
                   </div>
                 )
-              })}
+              })
+            }
+
+            <div className="inputGroup">
+              <p className="inputName">Phone2</p>
+
+              <div className="disValue">
+              <PhoneInput
+                defaultCountry='IN'
+                withCountryCallingCode={true}
+                smartCaret={true}
+                style={{direction:"ltr"}}
+                placeholder="Enter phone number"
+                value={value}
+                onChange={()=>{}} {...register("phone" ,{
+                  minLength:{
+                    value:11,
+                    message:"Wrong Number"
+                  }
+                })}/>
+                {errors.phone && <p style={{color:"red"}}>{errors.phone?.message}</p>}
+                      
+              </div>
+            </div>
 
             <h4 className="headingField">Links</h4>
 
@@ -175,6 +222,7 @@ const Field = () => {
                     <div className="inputGroup3">
                       <p className="inputName" onClick={item.label === 'Race' ? handleClick : () => { }}>
                         {item.label}
+                          {/* <i className='fa fa-info' /> */}
                       </p>
                       <div className="disValue3">
                         <select className='inputValue3' {...register(item.label)} >

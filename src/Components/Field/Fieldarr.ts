@@ -46,8 +46,9 @@ export const Fieldarr:FieldarrInt[] = [
         input:"Phone",
         type:"text",   
         label:"Phone",
-        errorMessage:"Phone number should not be less than 6",
-        required:false
+        errorMessage:"Invalid number",
+        required:false,
+        pattern:/^(\+91[\-\s]?)?[0]?(91)?[789]\d{9}$/
     },
     {
         input:"Current Company",
