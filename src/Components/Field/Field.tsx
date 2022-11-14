@@ -25,7 +25,18 @@ const Field = () => {
 
               <div className="disValue">
                 <button className="inputValue" style={{ minWidth: "250px" }}>Attach</button>
-                <input className="inputFile" type="file" style={{ textAlign: "left" }} />
+                <input className="inputFile" type="file" style={{ textAlign: "left" }} onChange={(event)=> {}}{
+                  ...register("attach",{ 
+                    required:{
+                      value:true,
+                      message:"Please add Attachment"
+                    }, 
+                    validate:{
+                      
+                    }
+                  })
+                }/>
+                {errors.attach && <p style={{color:"red"}}>{errors.attach?.message}</p>}
               </div>
             </div>
 
@@ -126,12 +137,18 @@ const Field = () => {
                     <div className="inputGroup2">
                       <div className="disValue2">
                         <textarea className='inputValue' placeholder={`${item.placeholder}`}
-                          style={{ minHeight: "120px" }} {...register(`${item.input}` ,{
-                            minLength:{
-                              value:item.minLength ?? 0,
-                              message:"Add Some More Info"
-                            }
-                          })} />
+                          style={{ minHeight: "120px" }} {...register(`${item.label}` ,
+                            {
+                              minLength:{
+                                value:item.minLength ?? 0 ,
+                                message:"Invaild add more text"
+                              }
+                            })}  
+                          // minLength:{
+                            //   value:item.minLength ?? 0,
+                            //   message:"Add Some More Info"
+                            // }
+                          />
                           {errors[item.label] && <p style={{color:"red"}}>{errors[item.label]?.message}</p>}
                       </div>
                     </div>

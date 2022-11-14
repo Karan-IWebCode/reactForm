@@ -152,8 +152,13 @@ input:focus{
     .container{
         width:80%
     }
+    .headingField{
+        padding-top: 5px;
+        padding-bottom: 0px;
+    }
     .inputGroup{
         flex-direction: column;
+        margin:10px auto 10px;
     }
     .disValue{
         width:100%;

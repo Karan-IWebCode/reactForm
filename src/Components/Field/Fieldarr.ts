@@ -120,7 +120,7 @@ export const Fieldarr4:FieldarrInt[] = [
         label:"additional information",
         placeholder:"Add a cover letter or anything else you want to share",
         required:false,
-        minLength:30
+        minLength:30,
     },
 ]
 
